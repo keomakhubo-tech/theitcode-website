@@ -2,7 +2,7 @@
 
 Official website for **THE IT CODE (Pty) Ltd**, a South African software engineering and digital transformation company.
 
-**Live Demo:** [[https://your-username.github.io/theitcode](https://keomakhubo-tech.github.io/theitcode-website/)
+[LIVE DEMO](https://keomakhubo-tech.github.io/theitcode-website/)
 
 > **Note:** This website is currently under development. Some features may not be fully functional yet. I will continue to update and improve it over time.
 
