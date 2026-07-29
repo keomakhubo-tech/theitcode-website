@@ -15,21 +15,28 @@ body {
     overflow-x: hidden;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* ========== HEADER (your original styles kept) ========== */
 .header{
     position:fixed;
     top:0;
     left:0;
     width:100%;
-    padding:22px 0;
+    padding:18px 0;
+    background: rgba(255,255,255,.18);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,.25);
     z-index:9999;
     transition:.45s;
-    background:#fff;
 }
 
 .header.scrolled{
-    background:rgba(255,255,255,.85);
-    backdrop-filter:blur(19px);
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(28px);
+    border-bottom: 1px solid rgba(255,255,255,.45);
     box-shadow:0 10px 30px rgba(0,0,0,.06);
 }
 
@@ -44,20 +51,19 @@ body {
 .logo {
     display:flex;
     align-items:center;
-    gap:13px;
+    gap:5px;
     color:#000;
 }
 
 .logo-box {
-    width:56px;
-    height:56px;
-    border: 1px solid #000;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:1rem;
-    letter-spacing:1px;
     transition:.4s;
+}
+
+.logo-box img {
+    width: 60px;
 }
 
 .logo-text {
@@ -66,7 +72,11 @@ body {
 }
 
 .company {
-    font-size:1rem;
+    font-size:1.3rem;
+}
+
+.company i {
+    color: #f20000;
 }
 
 .tagline{
@@ -88,6 +98,10 @@ body {
     transition:.35s;
 }
 
+.nav-links a:hover {
+    font-weight: 600;
+}
+
 .nav-links a::after{
     content:"";
     position:absolute;
@@ -95,22 +109,23 @@ body {
     bottom:-8px;
     width:0;
     height:1px;
-    background: #808080;
+    background: #f20000;
     transition:.35s;
 }
 
-.nav-links a:hover::after{
-    width:100%;
+.nav-links a.active::after {
+    width: 100%;
+    background: #f20000;
 }
 
 .header-btn{
     padding:13px 22px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 10px;
-    color: #000;
+    color: #fff;
     transition:.35s;
     font-size: .95rem;
-    background:#fff;
+    background: #f20000;
 }
 
 .header-btn:hover{
@@ -133,12 +148,11 @@ body {
 }
 
 .header.scrolled .navbar a::after{
-    background:black;
+    background:#f20000;
 }
 
 .header.scrolled .header-btn{
-    border-color:black;
-    color:black;
+    color: #fff;
 }
 
 .header.scrolled .header-btn:hover{
@@ -170,21 +184,73 @@ body {
 
 /* ========== HERO ========== */
 .hero {
+    position: relative;
     min-height: 100vh;
-    padding: 160px 0 100px;
     display: flex;
     align-items: center;
-    position: relative;
+    overflow: hidden;
+    padding-top: 130px;
+    padding-bottom: 60px;
     background: #fff;
 }
 
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        #fff 0%,
+        #fff 36%,
+        rgba(255,255,255,.22) 48%,
+        rgba(255,255,255,.35) 48%,
+        rgba(255,255,255,0) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    right: -180px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 700px;
+    height: 700px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 100%;
+    max-width: 780px;
+    height: 100vh;
+    min-height: 520px;
+    transform: translateY(-50%);
+    background: url(../images/bg.png) no-repeat center right;
+    background-size: cover;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .hero-container {
+    position: relative;
+    z-index: 2;
     width: min(92%, 1400px);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 60px;
+    margin: auto;
+    display: flex;
     align-items: center;
+}
+
+.hero-content {
+    width: 48%;
+    max-width: 580px;
+    position: relative;
+    z-index: 3;
 }
 
 .hero-label {
@@ -222,7 +288,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 15px 28px;
-    background: #000;
+    background: #f20000;
     border-radius: 10px;
     color: #fff;
     font-size: 0.95rem;
@@ -232,7 +298,9 @@ body {
 }
 
 .btn-primary:hover {
-    background: #1a1a1a;
+    background: #fff;
+    color: #000;
+    box-shadow: rgba(242, 0, 0, 0.2) 0px 2px 8px 0px;
 }
 
 .btn-secondary {
@@ -240,7 +308,8 @@ body {
     align-items: center;
     padding: 15px 28px;
     background: transparent;
-    color: #000;
+    color: #fff;
+    background: #000;
     border-radius: 10px;
     font-size: 0.95rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -248,14 +317,29 @@ body {
 }
 
 .btn-secondary:hover {
-    background: #000;
-    color: #fff;
+    background: #fff;
+    color: #000;
+    box-shadow: rgba(242, 0, 0, 0.2) 0px 2px 8px 0px;
 }
 
 .hero-visual {
-    height: 420px;
-    background: radial-gradient(circle at 70% 50%, rgba(0,0,0,0.04) 0%, transparent 60%);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 480px;
+    overflow: visible;
+}
+
+.hero-img {
+    width: 115%;
+    max-width: none;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    user-select: none;
+    pointer-events: none;
+    margin-right: -40px;
 }
 
 /* ========== SECTIONS ========== */
@@ -525,10 +609,48 @@ body {
         display:none;
     }
 
+    .logo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo .logo-box img {
+        width: 44px;
+    }
+
+    .logo .company {
+        font-size: 0.95rem;
+        line-height: 0.5;
+    }
+
+    .mobile-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        color: #000;
+    }
+
+    .mobile-logo .logo-box img {
+        width: 48px;
+    }
+
+    .mobile-logo .company {
+        font-size: 1rem;
+    }
+
+    .mobile-logo .company i {
+        color: #f20000;
+    }
+
+    .mobile-logo .tagline {
+        color: #666;
+        font-size: 0.7rem;
+    }
+
     .hamburger{
         display:flex;
         flex-direction:column;
-        gap:6px;
+        gap:5px;
         cursor:pointer;
         z-index:10001;
     }
@@ -572,7 +694,6 @@ body {
     .mobile-logo{
         display:flex;
         align-items:center;
-        gap:15px;
         color:black;
     }
 
@@ -600,6 +721,10 @@ body {
         display:none;
     }
 
+    .nav-links a.active {
+        color: #f20000;
+    }
+
     .menu-footer{
         display:flex;
         flex-direction:column;
@@ -612,15 +737,26 @@ body {
         font-size:.7rem;
         line-height:1.8;
         color:#777;
+        text-align: center;
     }
 
     .menu-btn{
-        font-size:.9rem;
-        color:black;
+    padding:13px 22px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    transition:.35s;
+    font-size: .95rem;
+    background: #f20000;
+    }
+
+    .menu-btn:hover {
+        background: #fff;
     }
 
     .hamburger.active span:nth-child(1){
-        transform:rotate(45deg) translate(5px, 3px);
+        transform:rotate(45deg) translate(5px, 1px);
         background:black;
     }
 
@@ -629,8 +765,12 @@ body {
     }
 
     .hamburger.active span:nth-child(3){
-        transform:rotate(-45deg) translate(5px, -3px);
+        transform:rotate(-45deg) translate(5px, -1px);
         background:black;
+    }
+
+    .hamburger.active span:hover {
+        background: #f20000;
     }
 
     /* Hero & sections mobile */
@@ -644,9 +784,16 @@ body {
         gap: 40px;
     }
 
-    .hero-visual {
-        display: none;
-    }
+.hero-bg,
+.hero::before,
+.hero::after {
+    display: none;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 100%;
+}
 
     .hero-title {
         font-size: 1.5rem;
@@ -687,18 +834,21 @@ body {
 }
 
 @media(max-width:480px){
-    .logo-box{
-        width:44px;
-        height:44px;
-        font-size:.8rem;
+
+    .logo .logo-box img {
+        width: 40px;
     }
 
-    .company{
-        font-size:.85rem;
+    .logo .company {
+        font-size: 0.85rem;
+    }
+    
+    .mobile-logo .logo-box img {
+        width: 42px;
     }
 
-    .tagline{
-        font-size:.6rem;
+    .mobile-logo .company {
+        font-size: 1rem;
     }
 
     .hero-title{
